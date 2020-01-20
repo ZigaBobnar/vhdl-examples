@@ -29,6 +29,27 @@ component VGA_DRIVER is
 
 end component VGA_DRIVER;
 
+signal vga_clk : std_logic := '0';
+signal request_frame : std_logic := '0';
+signal set_red, set_green, set_blue : std_logic_vector(3 downto 0) := (others => 0);
+signal hpos : integer range 0 to 2256 := '0';
+signal vpos : integer range 0 to 1087 := '0';
+
 begin
+
+	vga1 : VGA_DRIVER port map (
+		vga_clk => vga_clk,
+		h_sync => HS,
+		v_sync => VS,
+		red => R,
+		green	 => G,
+		blue	 => B,
+		request_frame => request_frame,
+		current_h => hpos,
+		current_v => vpos,
+		red_in	 => set_red,
+		green_in  => set_green,
+		blue_in	 => set_blue
+	);
 
 end main;
